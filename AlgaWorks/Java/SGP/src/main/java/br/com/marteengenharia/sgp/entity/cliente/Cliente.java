@@ -12,12 +12,14 @@ import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "cliente")
 @Data
-@NoArgsConstructor
+@NoArgsConstructor 
 @AllArgsConstructor
 public class Cliente implements Serializable{
 
@@ -26,6 +28,8 @@ public class Cliente implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="cliente_id")
+	@Setter
+	@Getter
 	private Long id;
 	@Column(name="codigo")
 	@NotNull
@@ -46,6 +50,8 @@ public class Cliente implements Serializable{
 	@Column(name="endereco")
 	@NotNull
 	private String endereco;
+	
+	
 	
 	
 		
