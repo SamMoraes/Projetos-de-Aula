@@ -1,0 +1,5 @@
+
+DADOS DA EMPRESA:
+ID DA EMPRESA.........: 1NOME FANTASIA.........: TRIBUSTECHRAZÃO SOCIAL..........: TRIBUS TECHNOLOGYCNPJ..................: 123123123QTD DE FUNCIONÁRIOS...: 3
+DADOS DOS FUNCIONÁRIOS:
+ID DO FUNCIONÁRIO.....: 1NOME..................: SAMUEL MORAESSALÁRIO...............: 3000.0CPF...................: 123123123---ID DO FUNCIONÁRIO.....: 2NOME..................: DAVI WILLISSALÁRIO...............: 3000.0CPF...................: 123123123---ID DO FUNCIONÁRIO.....: 3NOME..................: 3000SALÁRIO...............: 3000.0CPF...................: 123123123---
