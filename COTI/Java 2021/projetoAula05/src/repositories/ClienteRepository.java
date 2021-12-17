@@ -2,6 +2,8 @@ package repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.Cliente;
@@ -35,7 +37,7 @@ public class ClienteRepository implements iClienteRepository{
 		Connection connection = ConnectionFactory.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement
-				("UPDATE CLIENTE SET  NOME =?, CPF=?, EMAIL=? WHERE IDCLIENTE =?)");
+				("UPDATE CLIENTE SET  NOME =?, CPF=?, EMAIL=? WHERE IDCLIENTE =?");
 		statement.setString(1, cliente.getNome());
 		statement.setString(2, cliente.getEmail());
 		statement.setString(3, cliente.getCpf());
@@ -51,7 +53,7 @@ public class ClienteRepository implements iClienteRepository{
 		Connection connection = ConnectionFactory.getConnection();
 		
 		PreparedStatement statement = connection.prepareStatement
-				("DELETE FROM CLIENTE WHERE IDCLIENTE =?)");
+				("DELETE FROM CLIENTE WHERE IDCLIENTE =?");
 		
 		statement.setInt(1, cliente.getIdCliente());
 		statement.execute(); //executando o comando
@@ -63,8 +65,38 @@ public class ClienteRepository implements iClienteRepository{
 
 	@Override
 	public List<Cliente> findAll(Cliente cliente) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+Connection connection = ConnectionFactory.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement
+				("SELECT * FROM CLIENTE");
+		
+		//Executando a consulta e capturando os registros obtidos
+		//atraves do componente ResultSet
+		ResultSet result = statement.executeQuery();
+		
+		List<Cliente> lista = new ArrayList<Cliente>();
+		
+		//percorrer cada cliente obtido do banco de dados
+		while(result.next()) {
+			
+			//criando um cliente..
+			Cliente c = new Cliente();
+			
+			c.setIdCliente(result.getInt("IDCLIENTE"));
+			c.setNome(result.getString("NOME"));
+			c.setEmail(result.getString("EMAIL"));
+			c.setCpf(result.getString("CPF"));
+			
+			//adicionar o cliente na lista
+			lista.add(c);
+		}
+		
+		result.close();
+		statement.close();
+		connection.close();
+		
+		return lista; //retornando a lista de clientes
+
 	}
 
 }
