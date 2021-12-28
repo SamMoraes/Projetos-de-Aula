@@ -1,0 +1,7 @@
+
+DADOS DO FUNCIONÁRIO
+	ID............: 1
+	Nome..........: sAMUEL
+	CPF...........: 234234
+	Matricula.....: 34234
+	Salário.......: 3444.66

@@ -1,0 +1,7 @@
+
+DADOS DO FUNCIONÁRIO
+	ID............: 1
+	Nome..........: Samuel Moraes
+	CPF...........: 1233456567
+	Matricula.....: 1233456
+	Salário.......: 3500.0
