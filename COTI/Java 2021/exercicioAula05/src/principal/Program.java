@@ -34,7 +34,7 @@ public class Program {
 				 JOptionPane.showMessageDialog(null, "ALUNO CADASTRADO COM SUCESSO"); 
 
 			}
-			if (opcao == 2) {
+			else if (opcao == 2) {
 
 				JOptionPane.showMessageDialog(null, "Você selecionou atualização de aluno");
 
