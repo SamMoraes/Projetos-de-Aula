@@ -1,14 +1,20 @@
 package br.com.cotiinformatica.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.cotiinformatica.entities.Usuario;
+import br.com.cotiinformatica.interfaces.IUsuarioRepository;
 import br.com.cotiinformatica.models.LoginModel;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private IUsuarioRepository usuarioRepository;
 
 	// método para abrir a página login.jsp (página inicial)
 	@RequestMapping(value = "/")
@@ -26,18 +32,45 @@ public class LoginController {
 		
 		ModelAndView modelAndView = new ModelAndView("login");
 		
-		//validar o campo 'email' como obrigatório
-		if(model.getEmail().trim().length() == 0) {
-			modelAndView.addObject("erro_email", "Por favor, informe seu email de acesso.");
-		}
+		try {
+			
+			boolean isValid = true;
+			
+			//validar o campo 'email' como obrigatório
+			if(model.getEmail().trim().length() == 0) {
+				modelAndView.addObject("erro_email", "Por favor, informe seu email de acesso.");
+				isValid = false;
+			}
 
-		//validar o campo 'senha' como obrigatório
-		if(model.getSenha().trim().length() == 0) {
-			modelAndView.addObject("erro_senha", "Por favor, informe sua senha de acesso.");
+			//validar o campo 'senha' como obrigatório
+			if(model.getSenha().trim().length() == 0) {
+				modelAndView.addObject("erro_senha", "Por favor, informe sua senha de acesso.");
+				isValid = false;
+			}
+			
+			if(isValid) {
+				
+				//consultar o usuario no banco de dados, baseado no email e na senha
+				Usuario usuario = usuarioRepository.findByEmailAndSenha(model.getEmail(), model.getSenha());
+				
+				//verificar se o usuario foi encontrado
+				if(usuario != null) {
+					modelAndView.addObject("mensagem_sucesso", "Olá " + usuario.getNome() + ", bem vindo ao sistema!");
+					model = new LoginModel();
+				}
+				else {
+					modelAndView.addObject("mensagem_erro", "Acesso negado. Usuário inválido.");
+				}
+			}
+		}
+		catch(Exception e) {
+			modelAndView.addObject("mensagem_erro", "Ocorreu um erro: " + e.getMessage());
 		}
 		
 		modelAndView.addObject("model", model);
-
 		return modelAndView;
 	}
 }
+
+
+
