@@ -47,7 +47,7 @@ public class LoginController {
 				modelAndView.addObject("erro_senha", "Por favor, informe sua senha de acesso.");
 				isValid = false;
 			}
-			
+			 
 			if(isValid) {
 				
 				//consultar o usuario no banco de dados, baseado no email e na senha
