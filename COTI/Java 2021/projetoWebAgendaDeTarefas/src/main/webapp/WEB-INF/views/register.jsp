@@ -1,9 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<!DOCTYPE html>
 <html>
 
 <head>
-<title>COTI InformÃ¡tica - Projeto Agenda</title>
+<meta charset="ISO-8859-1">
+<title>COTI Informática - Projeto Agenda</title>
 
 <!-- Referencia da folha de estilos CSS do bootstrap -->
 <link
@@ -17,7 +20,7 @@
 	<div class="card mt-5 col-md-8 offset-md-2">
 		<div class="card-body">
 
-			<h5 class="card-title">Crie sua Conta de UsuÃ¡rio</h5>
+			<h5 class="card-title">Crie sua Conta de Usuário</h5>
 			<p>Preencha os campos para cadastrar sua conta de acesso.</p>
 			<hr />
 
@@ -27,7 +30,7 @@
 					<div class="col-md-6">
 						<label>Informe o seu nome:</label>
 						<form:input path="model.nome" type="text" class="form-control"
-							placeholder="Ex: JoÃ£o Pedro" />
+							placeholder="Ex: João Pedro" />
 						<div class="text-danger">${erro_nome}</div>
 					</div>
 					<div class="col-md-6">

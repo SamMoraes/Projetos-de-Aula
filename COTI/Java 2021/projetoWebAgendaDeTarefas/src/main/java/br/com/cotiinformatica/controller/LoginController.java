@@ -1,5 +1,7 @@
 package br.com.cotiinformatica.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class LoginController {
 
 	// método para capturar o SUBMIT POST do formulário
 	@RequestMapping(value = "post-login", method = RequestMethod.POST)
-	public ModelAndView postLogin(LoginModel model) {
+	public ModelAndView postLogin(LoginModel model, HttpServletRequest request) {
 		
 		ModelAndView modelAndView = new ModelAndView("login");
 		
@@ -47,7 +49,7 @@ public class LoginController {
 				modelAndView.addObject("erro_senha", "Por favor, informe sua senha de acesso.");
 				isValid = false;
 			}
-			 
+			
 			if(isValid) {
 				
 				//consultar o usuario no banco de dados, baseado no email e na senha
@@ -55,8 +57,12 @@ public class LoginController {
 				
 				//verificar se o usuario foi encontrado
 				if(usuario != null) {
-					modelAndView.addObject("mensagem_sucesso", "Olá " + usuario.getNome() + ", bem vindo ao sistema!");
-					model = new LoginModel();
+					
+					//gravar os dados do usuário em uma sessão
+					request.getSession().setAttribute("usuario", usuario);
+					
+					//redirecionar para a página de consulta de tarefas..
+					modelAndView.setViewName("redirect:tarefas-consulta");
 				}
 				else {
 					modelAndView.addObject("mensagem_erro", "Acesso negado. Usuário inválido.");

@@ -1,12 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<!DOCTYPE html>
 <html>
 
 <head>
+<meta charset="ISO-8859-1">
+<title>COTI Informática - Projeto Agenda</title>
 
-<title>COTI InformÃ¡tica - Projeto Agenda</title>
-
-<!-- folhas de estilo CSS da pÃ¡gina -->
+<!-- folhas de estilo CSS da página -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -27,7 +29,7 @@
 
 			<hr />
 
-			<!-- formulÃ¡rio para preenchimento dos dados do usuÃ¡rio (login) -->
+			<!-- formulário para preenchimento dos dados do usuário (login) -->
 			<form method="post" action="post-login">
 
 				<label>Email de acesso:</label>
@@ -44,7 +46,7 @@
 					<input type="submit" value="Acessar Sistema"
 						class="btn btn-primary" />
 				</div>
- 
+
 			</form>
 			<div class="mt-3 mb-3">
 
@@ -59,14 +61,14 @@
 			</div>
 
 			<div class="d-grid">
-				NÃ£o possui uma conta? <a href="/projetoWebAgendaDeTarefas/register">Cadastre-se
+				Não possui uma conta? <a href="/projetoWebAgendaDeTarefas/register">Cadastre-se
 					aqui!</a>
 			</div>
 
 		</div>
 	</div>
 
-	<!-- arquivos javascript da pÃ¡gina -->
+	<!-- arquivos javascript da página -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
