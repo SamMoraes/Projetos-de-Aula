@@ -1,22 +1,19 @@
 package factories;
 
-import entities.Project;
-
 public class PermissionFactory {
 
 	
 	protected static final String PATH = "C:\\TEMP\\";
 	
-	public void permissionProject(Project project) throws Exception{
+	public static void permissionProject() throws Exception{
 		
-		String comand = "icacls.exe \""+ PATH + project.getNome() + "\" /restore C:\\Users\\administrador\\TDPERMISSAO.acl" ;
+		String batDirectory = "\\\\adds-server-01\\Publico\\Scripts\\CriacaoProjetos\\icaclsProjeto.bat";
+	
+		Runtime.getRuntime().exec("cmd.exe /c " + batDirectory); 
 		
-		Runtime.getRuntime().exec("cmd.exe /c start " + comand); 
-		
-		System.out.println(comand);
+		System.out.println(batDirectory);
 	}
 	
 	
 
-	/* C:\Users\administrador\TDPERMISSAO.acl */
 }

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import br.com.cotiinformatica.entities.Tarefa;
+import br.com.cotiinformatica.helpers.DateHelper;
 import br.com.cotiinformatica.interfaces.ITarefaRepository;
 
 public class TarefaRepository implements ITarefaRepository {
@@ -30,7 +31,7 @@ public class TarefaRepository implements ITarefaRepository {
 		Object[] params = {
 			tarefa.getNome(),
 			tarefa.getDescricao(),
-			tarefa.getData(),
+			DateHelper.toString(tarefa.getData()),
 			tarefa.getHora(),
 			tarefa.getPrioridade(),
 			tarefa.getUsuario().getIdUsuario()
@@ -48,7 +49,7 @@ public class TarefaRepository implements ITarefaRepository {
 		Object[] params = {
 				tarefa.getNome(),
 				tarefa.getDescricao(),
-				tarefa.getData(),
+				DateHelper.toString(tarefa.getData()),
 				tarefa.getHora(),
 				tarefa.getPrioridade(),
 				tarefa.getIdTarefa(),
@@ -108,8 +109,8 @@ public class TarefaRepository implements ITarefaRepository {
 		
 		Object[] params = {
 				idUsuario,
-				dataMin, 
-				dataMax
+				DateHelper.toString(dataMin), 
+				DateHelper.toString(dataMax)
 			};
 		
 		List<Tarefa> lista = jdbcTemplate.query(sql, params, new RowMapper<Tarefa>() {
@@ -167,6 +168,8 @@ public class TarefaRepository implements ITarefaRepository {
 		}	
 	}
 }
+
+
 
 
 

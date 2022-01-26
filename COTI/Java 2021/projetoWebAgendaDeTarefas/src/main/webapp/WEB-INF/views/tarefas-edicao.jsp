@@ -1,3 +1,5 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <html>
 
 <head>
@@ -21,36 +23,54 @@
 		<p>Utilize os campos abaixo para alterar os dados da tarefa.</p>
 		<hr/>
 		
-		<form>
+		<form method="post" action="post-tarefas-edicao">
+		
+			<!-- campo oculto -->
+			<form:input path="model.idTarefa" type="hidden"/>
 		
 			<div class="row">
 				<div class="col-md-6">
 					<label>Nome da tarefa:</label>
-					<input type="text" class="form-control" placeholder="Digite aqui"/>
+					<form:input path="model.nome" type="text" class="form-control" placeholder="Digite aqui"/>
+					<span class="text-danger">
+						${erro_nome}
+					</span>
 				</div>		
 				<div class="col-md-2">
 					<label>Data:</label>
-					<input type="date" class="form-control"/>
+					<form:input path="model.data" type="date" class="form-control"/>
+					<span class="text-danger">
+						${erro_data}
+					</span>
 				</div>	
 				<div class="col-md-2">
 					<label>Hora:</label>
-					<input type="time" class="form-control"/>
+					<form:input path="model.hora" type="time" class="form-control"/>
+					<span class="text-danger">
+						${erro_hora}
+					</span>
 				</div>	
 				<div class="col-md-2">
 					<label>Prioridade:</label>
-					<select class="form-select">
+					<form:select path="model.prioridade" class="form-select">
 						<option value="">Selecione</option>
 						<option value="1">Baixa</option>
 						<option value="2">Média</option>
 						<option value="3">Alta</option>
-					</select>
+					</form:select>
+					<span class="text-danger">
+						${erro_prioridade}
+					</span>
 				</div>	
 			</div>
 			
 			<div class="row mt-3">
 				<div class="col-md-12">
 					<label>Descrição da tarefa:</label>
-					<textarea class="form-control"></textarea>
+					<form:textarea path="model.descricao" class="form-control"></form:textarea>
+					<span class="text-danger">
+						${erro_descricao}
+					</span>
 				</div>
 			</div>
 			
