@@ -5,7 +5,10 @@
 <html>
 
 <head>
+<<<<<<< Updated upstream
 <meta charset="ISO-8859-1">
+=======
+>>>>>>> Stashed changes
 <title>COTI Informática - Projeto Agenda</title>
 
 <!-- Referencia da folha de estilos CSS do bootstrap -->

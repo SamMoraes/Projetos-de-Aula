@@ -8,6 +8,11 @@
 <meta charset="ISO-8859-1">
 <title>COTI Informática - Projeto Agenda</title>
 
+<<<<<<< Updated upstream
+=======
+<title>COTI Informática - Projeto Agenda</title>
+
+>>>>>>> Stashed changes
 <!-- folhas de estilo CSS da página -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
