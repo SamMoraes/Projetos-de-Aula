@@ -1,6 +1,9 @@
 package repositories;
 
 import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 
 import entities.Project;
 import interfaces.IProjectRepository;
@@ -34,10 +37,14 @@ public class TdProjectRepository implements IProjectRepository {
 	@Override
 	public void copyStructure(Project project) throws Exception {
 		
-		String directory = "robocopy.exe \"Z:\\GO\\GO_TI\\01_Infraestrutura\\01.1_Documentacao\\Estrutura de pastas\\Projetos TD\" \"" + PATH + "novoProjetoTD" + "\"  *.* /e /r:0 /w:0 /tee "; 
-		
-		Runtime.getRuntime().exec("cmd /c " + directory); 
-		
+		File source = new File("Z:\\GO\\GO_TI\\01_Infraestrutura\\01.1_Documentacao\\Estrutura de pastas\\Projetos TD\\");
+		File dest = new File(PATH + "novoProjetoTD");
+		try {
+		    FileUtils.copyDirectory(source, dest);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+
 		
 		} 
 	}
