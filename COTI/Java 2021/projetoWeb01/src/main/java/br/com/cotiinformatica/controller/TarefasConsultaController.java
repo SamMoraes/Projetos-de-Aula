@@ -1,6 +1,7 @@
 package br.com.cotiinformatica.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,8 +64,24 @@ public class TarefasConsultaController {
 				Date dataMax = DateHelper.toDate(model.getDataMax());
 
 				// consultando os dados no banco
-				modelAndView.addObject("tarefas",
-						tarefaRepository.findByDatas(dataMin, dataMax, usuario.getIdUsuario()));
+				List<Tarefa> tarefas = tarefaRepository.findByDatas(dataMin, dataMax, usuario.getIdUsuario());
+				modelAndView.addObject("tarefas", tarefas);
+				
+				//calculando o total de tarefas por prioridade
+				int qtdBaixa = 0;
+				int qtdMedia = 0;
+				int qtdAlta = 0;
+				
+				for(Tarefa t : tarefas) {
+					if(t.getPrioridade().equals("BAIXA")) qtdBaixa++;
+					else if(t.getPrioridade().equals("MEDIA")) qtdMedia++;
+					else if(t.getPrioridade().equals("ALTA")) qtdAlta++;
+				}
+				
+				//enviando as variaveis para a página 
+				modelAndView.addObject("qtdbaixa", qtdBaixa);
+				modelAndView.addObject("qtdmedia", qtdMedia);
+				modelAndView.addObject("qtdalta", qtdAlta);
 			}
 		} catch (Exception e) {
 			modelAndView.addObject("mensagem_erro", e.getMessage());
@@ -101,3 +118,7 @@ public class TarefasConsultaController {
 		return modelAndView;
 	}
 }
+
+
+
+

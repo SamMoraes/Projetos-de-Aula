@@ -58,6 +58,67 @@
 		
 		<c:if test="${tarefas.size() > 0}">
 		
+			<div class="row">
+				<div class="col-md-3">
+				
+					<div class="row mb-3">
+						<div class="col-md-12">
+							<div class="card bg-success">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-8">
+											<div class="text-white">Prioridade Baixa</div>
+										</div>
+										<div class="col-md-4 text-center">
+											<strong class="text-white">${qtdbaixa}</strong>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row mb-3">
+						<div class="col-md-12">
+							<div class="card bg-warning">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-8">
+											<div class="text-white">Prioridade Média</div>
+										</div>
+										<div class="col-md-4 text-center">
+											<strong class="text-white">${qtdmedia}</strong>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row mb-3">
+						<div class="col-md-12">
+							<div class="card bg-danger">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-8">
+											<div class="text-white">Prioridade Alta</div>
+										</div>
+										<div class="col-md-4 text-center">
+											<strong class="text-white">${qtdalta}</strong>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-md-9">
+					<div id="grafico"></div>
+				</div>
+			</div>
+		
+		
 			<table class="table table-sm table-hover mt-3">
 				<thead>
 					<tr>
@@ -123,7 +184,48 @@
 	<!-- Arquivos javascript -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		
+	<!-- Arquivos javascript do HighCharts -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	
+	<script>
+		
+		var array = [];
+		
+		//dados do gráfico
+		array.push(['Prioridade ALTA', ${qtdalta}]);
+		array.push(['Prioridade MEDIA', ${qtdmedia}]);
+		array.push(['Prioridade BAIXA', ${qtdbaixa}]);
+		
+		//desenhando o gráfico
+		new Highcharts.Chart({
+			chart: {
+				type : 'pie',
+				renderTo: 'grafico',
+				height: 240
+			},
+			plotOptions: {
+				pie : {
+					innerSize: '60%',
+					dataLabels: { enable: true }
+				}
+			},
+			title: {
+				text: 'Tarefas por prioridade'
+			},
+			series: [
+				{ data: array }
+			],
+			colors: ['#d9534f', '#f0ad4e', '#5cb85c']
+		});
+		
+	</script>
 
 </body>
 
 </html>
+
+
