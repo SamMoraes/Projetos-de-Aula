@@ -11,7 +11,6 @@ public class PermissionFactory {
 	
 		Runtime.getRuntime().exec("cmd.exe /c " + batDirectory); 
 		
-		System.out.println(batDirectory);
 	}
 	
 	
