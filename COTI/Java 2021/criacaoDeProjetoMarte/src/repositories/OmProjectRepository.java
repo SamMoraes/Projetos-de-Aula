@@ -1,13 +1,16 @@
 package repositories;
 
 import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 
 import entities.Project;
 import interfaces.IProjectRepository;
 
 public class OmProjectRepository implements IProjectRepository {
 
-	protected static final String PATH = "C:\\TEMP\\";
+	protected static final String PATH = "\\\\storage04\\FILESERVER\\OM\\OM_OPERACOES\\";
 
 	@Override
 	public void createFolder(Project project) throws Exception {
@@ -20,12 +23,23 @@ public class OmProjectRepository implements IProjectRepository {
 	@Override
 	public void copyStructure(Project project) throws Exception {
 
-		String directory = "robocopy.exe \"Z:\\GO\\GO_TI\\01_Infraestrutura\\01.1_Documentacao\\Estrutura de pastas\\Projetos OM\" \""
-				+ PATH + project.getNome() + "\"  *.* /e /r:0 /w:0 /tee ";
 
-		Runtime.getRuntime().exec("cmd /c " + directory);
-
-		
+		File source = new File("\\\\storage04\\FILESERVER\\GO\\GO_TI\\01_Infraestrutura\\01.1_Documentacao\\Estrutura de pastas\\Projetos OM\\");
+		File dest = new File(PATH + project.getNome());
+		try {
+		    FileUtils.copyDirectory(source, dest);
+		} 
+		catch (IOException e) {
+		    e.printStackTrace();
+		}
+		   
 	}
+
+	@Override
+	public void testFolderExists(Project project) throws Exception {
+		//TODO
+		} 
+		 
+	
 
 }

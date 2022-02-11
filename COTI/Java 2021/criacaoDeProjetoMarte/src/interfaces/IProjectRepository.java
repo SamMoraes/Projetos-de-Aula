@@ -8,5 +8,7 @@ public interface IProjectRepository {
 	
 	void copyStructure(Project project) throws Exception;
 	
+	void testFolderExists(Project project) throws Exception;
+	
 	
 }

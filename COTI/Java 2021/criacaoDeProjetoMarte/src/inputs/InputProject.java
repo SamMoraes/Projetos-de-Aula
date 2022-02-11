@@ -1,17 +1,6 @@
 package inputs;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import entities.Project;
 import factories.PermissionFactory;
@@ -20,81 +9,61 @@ import repositories.TdProjectRepository;
 
 public class InputProject {
 
-	public static void Panel() {
+	
+	
+	Project p = new Project();
+	
+	TdProjectRepository tdProject = new TdProjectRepository();
+	OmProjectRepository omProject = new OmProjectRepository();
+
+	public static void inputProjectTd() {
 
 		Project p = new Project();
 		TdProjectRepository tdProject = new TdProjectRepository();
+
+		try {
+			p.setNome(JOptionPane.showInputDialog("Insira o nome do projeto:"));
+			
+						
+			if (p.getNome() != null) {
+				tdProject.createFolder(p);
+				tdProject.copyStructure(p);
+				PermissionFactory.permissionProject();
+				Thread.sleep(20000);
+				tdProject.remaneFolder(p);
+				JOptionPane.showMessageDialog(null, "Projeto criado com sucesso");
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Não foi inserido o nome do projeto" + "\nSelecione o tipo de projeto e tente novamente.");
+			}
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+
+	}
+
+	public static void inputProjectOm() {
+
+		Project p = new Project();
 		OmProjectRepository omProject = new OmProjectRepository();
 
-		// PAINEL
-		JFrame frame = new JFrame("Criação de Projeto");
-		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Selecione o tipo de projeto");
-		JButton btnTD = new JButton("Projeto TD");
-		JButton btnOM = new JButton("Projeto OM");
+		try {
+			p.setNome(JOptionPane.showInputDialog("Insira o nome do projeto:"));
 
-		Dimension size = label.getPreferredSize();
-		label.setBounds(150, 30, size.width, size.height);
-		label.setFont(new Font("SansSerif", Font.PLAIN, 20));
-		panel.add(label);
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		frame.getContentPane();
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		btnTD.setPreferredSize(new Dimension(250, 40));
-		btnOM.setPreferredSize(new Dimension(250, 40));
+			if (p.getNome() != null) {
 
-		// CHAMADA DAS FUNÇÕES DE CRIAÇÃO DE PROJETO TD NO BOTÃO
-		btnTD.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				Object obj = ae.getSource();
+				omProject.createFolder(p);
+				omProject.copyStructure(p);
+				JOptionPane.showMessageDialog(null, "Projeto criado com sucesso");
 
-				if (obj == btnTD) {
-					try {
-						p.setNome(JOptionPane.showInputDialog("Insira o nome do projeto:"));
-						tdProject.createFolder(p);
-						tdProject.copyStructure(p);
-						PermissionFactory.permissionProject();
-						Thread.sleep(15000);
-						tdProject.remaneFolder(p);
-						JOptionPane.showMessageDialog(null, "Projeto criado com sucesso");
-
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
-					}
-				}
-
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Não foi inserido o nome do projeto" + "\nSelecione o tipo de projeto e tente novamente.");
 			}
 
-		});
-
-		// CHAMADA DAS FUNÇÕES DE CRIAÇÃO DE PROJETO OM NO BOTÃO
-		btnOM.addActionListener(new ActionListener() {		
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				Object obj = ae.getSource();
-
-				if (obj == btnOM) {
-					try {
-						p.setNome(JOptionPane.showInputDialog("Insira o nome do projeto:"));
-						omProject.createFolder(p);
-						omProject.copyStructure(p);
-						JOptionPane.showMessageDialog(null, "Projeto criado com sucesso");
-
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
-					}
-				}
-
-			}
-
-		});
-		
-		frame.add(panel);
-		panel.add(btnTD);
-		panel.add(btnOM);
-		frame.setSize(400, 200);
-		frame.setVisible(true);
-
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
 	}
 }
