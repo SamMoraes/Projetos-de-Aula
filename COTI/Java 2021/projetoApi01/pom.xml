@@ -46,8 +46,21 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.49</version><!--$NO-MVN-MAN-VER$-->
+			<version>5.1.49</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
+		<!-- Dependencias para o swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -59,7 +72,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version><!--$NO-MVN-MAN-VER$-->
+				<version>3.1.0</version><!--$NO-MVN-MAN-VER$ -->
 			</plugin>
 		</plugins>
 	</build>

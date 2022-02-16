@@ -1,5 +1,6 @@
 package br.com.cotiinformatica.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import br.com.cotiinformatica.entities.Produto;
 import br.com.cotiinformatica.repositories.IProdutoRepository;
 import br.com.cotiinformatica.requests.ProdutoPostRequest;
 import br.com.cotiinformatica.requests.ProdutoPutRequest;
+import br.com.cotiinformatica.responses.ProdutoGetResponse;
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 @Transactional
@@ -30,6 +33,7 @@ public class ProdutoController {
 	private static final String ENDPOINT = "/api/produtos";
 
 	// método para realizar o serviço de cadastro de produto
+	@ApiOperation("Serviço para cadastro de produto.")
 	@RequestMapping(value = ENDPOINT, method = RequestMethod.POST)
 	public ResponseEntity<String> post(@RequestBody ProdutoPostRequest request) {
 
@@ -57,6 +61,7 @@ public class ProdutoController {
 	}
 
 	// método para realizar o serviço de edição do produto
+	@ApiOperation("Serviço para atualização dos dados de um produto.")
 	@RequestMapping(value = ENDPOINT, method = RequestMethod.PUT)
 	public ResponseEntity<String> put(@RequestBody ProdutoPutRequest request) {
 		
@@ -97,6 +102,7 @@ public class ProdutoController {
 	}
 
 	// método para realizar o serviço de exclusão do produto
+	@ApiOperation("Serviço para exclusão de um produto.")
 	@RequestMapping(value = ENDPOINT + "/{idProduto}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> delete(@PathVariable("idProduto") Integer idProduto) {
 		
@@ -130,16 +136,66 @@ public class ProdutoController {
 	}
 
 	// método para realizar a consulta dos produtos
+	@ApiOperation("Serviço para consultar todos os produtos da aplicação.")
 	@RequestMapping(value = ENDPOINT, method = RequestMethod.GET)
-	public ResponseEntity<List<Produto>> get() {
+	public ResponseEntity<List<ProdutoGetResponse>> get() {
 
-		List<Produto> produtos = (List<Produto>) produtoRepository.findAll();
+		List<ProdutoGetResponse> response = new ArrayList<ProdutoGetResponse>();
+		
+		for(Produto produto : produtoRepository.findAll()) {
+			
+			ProdutoGetResponse item = new ProdutoGetResponse();
+			
+			item.setIdProduto(produto.getIdProduto());
+			item.setNome(produto.getNome());
+			item.setDescricao(produto.getDescricao());
+			item.setPreco(produto.getPreco());
+			item.setQuantidade(produto.getQuantidade());
+			item.setTotal(produto.getPreco() * produto.getQuantidade());
+			
+			response.add(item);
+		}
 		
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(produtos);
+				.body(response);
 	}
+	
+	//método para consultar 1 produto baseado no ID
+	@ApiOperation("Serviço para consultar 1 produto através do ID.")
+	@RequestMapping(value = ENDPOINT + "/{idProduto}", method = RequestMethod.GET)
+	public ResponseEntity<ProdutoGetResponse> getById(@PathVariable("idProduto") Integer idProduto) {
+		
+		//consultar o produto no banco de dados atraves do ID
+		Optional<Produto> item = produtoRepository.findById(idProduto);
+		
+		//verificar se o produto não foi encontrado
+		if(item.isEmpty()) {			
+			return ResponseEntity
+					.status(HttpStatus.NOT_FOUND)
+					.body(null);
+		}
+		else {
+			
+			ProdutoGetResponse response = new ProdutoGetResponse();
+			Produto produto = item.get();
+			
+			response.setIdProduto(produto.getIdProduto());
+			response.setNome(produto.getNome());
+			response.setDescricao(produto.getDescricao());
+			response.setPreco(produto.getPreco());
+			response.setQuantidade(produto.getQuantidade());
+			response.setTotal(produto.getPreco() * produto.getQuantidade());
+		
+			return ResponseEntity
+					.status(HttpStatus.OK)
+					.body(response);
+		}			
+	}
+	
 }
+
+
 
 
 
