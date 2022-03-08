@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthHelper } from '../_helpers/auth-helper';
  
 @Component({
   selector: 'app-login',
@@ -10,11 +11,12 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
  
-  mensagem_sucesso: string = '';
   mensagem_erro: string = '';
+  exibirPagina: boolean = false;
  
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authHelper: AuthHelper
   ) { }
  
   //montando a estrutura do formulário
@@ -29,23 +31,32 @@ export class LoginComponent implements OnInit {
   }
  
   ngOnInit(): void {
+    if(this.authHelper.isAuthenticated()){
+      //redirecionamento..
+      window.location.href = "/consultar-produtos";
+    }
+    else{
+      this.exibirPagina = true;
+    }
   }
  
   onSubmit(): void {
  
-    this.mensagem_sucesso = '';
     this.mensagem_erro = '';
  
     this.httpClient.post(environment.apiUrl + "/login", this.formLogin.value,
       { responseType: 'text' })
       .subscribe(
         data => {
-          this.mensagem_sucesso = 'Autenticação realizada com sucesso!';
-          this.formLogin.reset();
- 
           //salvar o TOKEN na LOCAL STORAGE
           localStorage.setItem('access_token', data);
+          //salvar o login do usuário na LOCAL STORAGE
+          localStorage.setItem('login_usuario', this.formLogin.value.login);
  
+          //limpar o formulário
+          this.formLogin.reset();
+          //redirecionamento
+          window.location.href = "/consultar-produtos";
         },
         e => {
           this.mensagem_erro = e.error;

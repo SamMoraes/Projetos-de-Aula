@@ -19,8 +19,8 @@ const routes: Routes = [
   { path: 'cadastrar-produtos', component: CadastrarProdutosComponent },
   { path: 'consultar-produtos', component: ConsultarProdutosComponent },
   { path: 'editar-produtos/:id', component: EditarProdutosComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'account', component: AccountComponent }
+  { path: 'account', component: AccountComponent },
+  { path: '', component: LoginComponent }
 ]
  
 @NgModule({
