@@ -3,6 +3,7 @@ package br.com.cotiinformatica.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +49,7 @@ public class Atendimento {
 	@JoinColumn(name = "idPaciente", nullable = false)
 	private Paciente paciente;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "atendimento_receitaMedica",
 			joinColumns = @JoinColumn(name = "idAtendimento", nullable = false),

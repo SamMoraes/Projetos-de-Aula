@@ -1,0 +1,31 @@
+use projetoapi02;
+
+insert into medico(crm, nome, telefone, tipo)
+values('000123456789', 'Ana Paula', '(21) 98701-0099', 'Cardiologista');
+
+insert into medico(crm, nome, telefone, tipo)
+values('000983718232', 'Roberto Carlos', '(21) 98232-0055', 'Oftamologista');
+
+insert into medico(crm, nome, telefone, tipo)
+values('000234827623', 'Bruna Silva', '(21) 97123-0022', 'Pediatra');
+
+select * from medico;
+
+insert into paciente(cpf, data_nascimento, nome, sexo)
+values('076.825.570-87', '1990-05-12', 'Pedro de Souza', "M");
+
+insert into paciente(cpf, data_nascimento, nome, sexo)
+values('730.969.030-34', '1995-08-10', 'Carlos Braga', "M");
+
+insert into paciente(cpf, data_nascimento, nome, sexo)
+values('101.509.260-81', '1980-10-25', 'Marcela Borges', "F");
+
+insert into paciente(cpf, data_nascimento, nome, sexo)
+values('212.391.180-15', '1981-11-24', 'Fabiana Dias', "F");
+
+select * from paciente;
+
+
+
+
+
