@@ -96,7 +96,7 @@ public class ClienteController {
 	// DELETE
 	@CrossOrigin
 	@ApiOperation("Serviço para exclusão de clientes.")
-	@RequestMapping(value = ENDPOINT, method = RequestMethod.DELETE)
+	@RequestMapping(value = ENDPOINT + "/{idCliente}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> delete(@PathVariable("idCliente") Integer idProduto) {
 
 		try {
