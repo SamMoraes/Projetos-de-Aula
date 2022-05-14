@@ -8,4 +8,5 @@ import br.com.athenas.entities.Pessoa;
 @Repository
 public interface IPessoaRepository extends CrudRepository<Pessoa, Integer>{
 
+	
 }

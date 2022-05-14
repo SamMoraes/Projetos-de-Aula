@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.athenas.entities.Pessoa;
 import br.com.athenas.repositories.IPessoaRepository;
+import br.com.athenas.requests.PessoaPesoIdealRequest;
 import br.com.athenas.requests.PessoaPostRequest;
 import br.com.athenas.requests.PessoaPutRequest;
 import br.com.athenas.responses.PessoaGetResponse;
@@ -92,7 +93,7 @@ public class PessoaController {
 
 	}
 
-	//exclusao de pessoas - DELETE
+	// exclusao de pessoas - DELETE
 	@CrossOrigin
 	@ApiOperation("Serviço para exclusão de pessoas")
 	@RequestMapping(value = ENDPOINT + "/{idPessoa}", method = RequestMethod.DELETE)
@@ -119,19 +120,19 @@ public class PessoaController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + e.getMessage());
 		}
 	}
-	
-	//consulta de todas as pessoas - GET
+
+	// consulta de todas as pessoas - GET
 	@CrossOrigin
 	@ApiOperation("Serviço para consultar todas as pessoas")
 	@RequestMapping(value = ENDPOINT, method = RequestMethod.GET)
-	public ResponseEntity<List<PessoaGetResponse>> get(){
-		
+	public ResponseEntity<List<PessoaGetResponse>> get() {
+
 		List<PessoaGetResponse> response = new ArrayList<PessoaGetResponse>();
-		
-		for(Pessoa pessoa : pr.findAll()) {
-			
+
+		for (Pessoa pessoa : pr.findAll()) {
+
 			PessoaGetResponse p = new PessoaGetResponse();
-			
+
 			p.setIdPessoa(pessoa.getIdPessoa());
 			p.setNome(pessoa.getNome());
 			p.setDataNasc(pessoa.getDataNasc());
@@ -139,45 +140,40 @@ public class PessoaController {
 			p.setSexo(pessoa.getSexo());
 			p.setAltura(pessoa.getAltura());
 			p.setPeso(pessoa.getPeso());
-			
+
 			response.add(p);
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(response);
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@CrossOrigin
+	@ApiOperation("Serviço para peso ideal das pessoas")
+	@RequestMapping(value = ENDPOINT + "/{idPessoa}" + "/pesoIdeal", method = RequestMethod.GET)
+	public ResponseEntity<String> pesoIdeal(@PathVariable("idPessoa") Integer idPessoa){
+		
+		try {
+
+			// consultar pessoa pelo ID
+			Optional<Pessoa> p = pr.findById(idPessoa);
+
+			// verificar se a pessoa não foi encontrada
+			if (p.isEmpty()) {
+
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Pessoa não encontrada");
+
+			} else {
+				Pessoa pessoa = p.get();
+				
+				pessoa.CalcularPesoIdeal(pessoa);
+
+				return ResponseEntity.status(HttpStatus.OK).body("Seu peso ideal é: " + pessoa.getPesoIdeal().toString());
+			}
+
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + e.getMessage());
+		}
+	}
 
 }

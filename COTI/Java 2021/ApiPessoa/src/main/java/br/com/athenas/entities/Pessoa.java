@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import br.com.athenas.enuns.Sexo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,19 +33,30 @@ public class Pessoa {
 	private Integer idPessoa;
 	@Column(nullable = false, length = 150)
 	private String nome;
+	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dataNasc;
-	@Column(nullable = false, length = 11, unique = true)
+	@Column(nullable = false, length = 14, unique = true)
 	private String cpf;
 	@Column(nullable = false)
-	private String sexo;
+	private Sexo sexo;
 	@Column(nullable = false)
 	private Double altura;
 	@Column(nullable = false)
 	private Double peso;
+	private Double pesoIdeal;
 	
 	
-	public void CalcularPesoIdeal() {
-		//TODO
+	public void CalcularPesoIdeal(Pessoa pessoa) {
+		
+				
+		if(pessoa.getSexo() == Sexo.MASCULINO) {
+			pesoIdeal=(72.7*altura)-58.0;
+		}
+		else {
+			pesoIdeal=(62.1*altura)-44.7;
+		}
 	}
+	
+	
 }
