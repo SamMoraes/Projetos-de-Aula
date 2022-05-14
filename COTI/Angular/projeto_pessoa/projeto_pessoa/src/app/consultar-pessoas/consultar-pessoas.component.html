@@ -1,0 +1,35 @@
+<h5>Consulta de pessoas</h5>
+<p>Listagem de todas as pessoas cadastradas</p>
+<hr />
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th width="160">Nome da pessoa</th>
+            <th width="180">Data de Nascimento</th>
+            <th width="160">CPF</th>
+            <th width="160">Gênero</th>
+            <th>Altura</th>
+            <th>Peso</th>
+            <th width="240">Operações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of pessoas">
+            <td>{{p.nome}}</td>
+            <td>{{p.dataNasc}}</td>
+            <td>{{p.cpf}}</td>
+            <td>{{p.sexo}}</td>
+            <td>{{p.altura}}</td>
+            <td>{{p.peso}}</td>
+            <td><button class="btn btn-sm btn-primary">Editar</button> &nbsp; <button
+                    class="btn btn-sm btn-danger">Excluir</button> &nbsp; <button
+                    class="btn btn-sm btn-primary">Peso Ideal</button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8"> Total de pessoas: {{pessoas.length}} </td>
+        </tr>
+    </tfoot>
+</table>
