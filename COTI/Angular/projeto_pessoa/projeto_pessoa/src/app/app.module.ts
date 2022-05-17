@@ -8,26 +8,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CadastrarPessoasComponent } from './cadastrar-pessoas/cadastrar-pessoas.component';
 import { ConsultarPessoasComponent } from './consultar-pessoas/consultar-pessoas.component';
+import { EditarPessoasComponent } from './editar-pessoas/editar-pessoas.component';
+import { DatePipe } from '@angular/common';
 
 //configurar uma rota de cada componente
 const routes: Routes = [
   { path: 'cadastrar-pessoas', component: CadastrarPessoasComponent }, 
-  { path: 'consultar-pessoas', component: ConsultarPessoasComponent }]
+  { path: 'consultar-pessoas', component: ConsultarPessoasComponent },
+  { path: 'editar-pessoas/:id', component: EditarPessoasComponent }
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastrarPessoasComponent,
-    ConsultarPessoasComponent
+    ConsultarPessoasComponent,
+    EditarPessoasComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

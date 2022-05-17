@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.athenas.entities.Pessoa;
 import br.com.athenas.repositories.IPessoaRepository;
-import br.com.athenas.requests.PessoaPesoIdealRequest;
 import br.com.athenas.requests.PessoaPostRequest;
 import br.com.athenas.requests.PessoaPutRequest;
 import br.com.athenas.responses.PessoaGetResponse;
@@ -83,6 +82,7 @@ public class PessoaController {
 				pessoa.setAltura(request.getAltura());
 				pessoa.setPeso(request.getPeso());
 
+				
 				pr.save(pessoa);
 
 				return ResponseEntity.status(HttpStatus.OK).body("Pessoa atualizada com sucesso");
@@ -147,6 +147,41 @@ public class PessoaController {
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 
 	}
+	
+	@CrossOrigin
+	@ApiOperation("Serviço para consultar 1 pessoa através do ID.")
+	@RequestMapping(value = ENDPOINT + "/{idPessoa}", method = RequestMethod.GET)
+	public ResponseEntity<PessoaGetResponse> getById(@PathVariable("idPessoa") Integer idPessoa){
+		
+		Optional<Pessoa> p = pr.findById(idPessoa);
+		
+		if(p.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		else {
+			PessoaGetResponse response = new PessoaGetResponse();
+			Pessoa pessoa = p.get();
+			
+		
+			response.setIdPessoa(pessoa.getIdPessoa());
+			response.setNome(pessoa.getNome());
+			response.setDataNasc(pessoa.getDataNasc());
+			response.setCpf(pessoa.getCpf());
+			response.setSexo(pessoa.getSexo());
+			response.setAltura(pessoa.getAltura());
+			response.setPeso(pessoa.getPeso());
+			
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+			
+			
+			
+			
+
+		}
+		
+	}
+	
+	
 
 	@CrossOrigin
 	@ApiOperation("Serviço para peso ideal das pessoas")

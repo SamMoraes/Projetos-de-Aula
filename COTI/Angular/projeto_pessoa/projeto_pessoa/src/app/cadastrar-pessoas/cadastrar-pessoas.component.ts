@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cadastrar-pessoas',
@@ -39,7 +40,7 @@ mensagem: string = '';
   onSubmit(): void{
 
     this.httpClient.post(
-      'http://localhost:8080/api/pessoa',
+      environment.apiUrl + '/pessoa',
       this.formCadastro.value,{
         responseType: 'text' }).subscribe(
           data => {

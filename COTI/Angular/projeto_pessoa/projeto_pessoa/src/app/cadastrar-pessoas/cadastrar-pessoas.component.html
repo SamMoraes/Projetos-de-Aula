@@ -17,26 +17,26 @@
         <span *ngIf="form.dataNasc.errors.required"> Por favor, informe a data de nascimento da pessoa. </span> 
       </div>
     </div>
-    <div class="col-md-3"> <label>CPF:</label> <input type="text" class="form-control" formControlName="cpf" /> 
+    <div class="col-md-3"> <label>CPF:</label> <input type="text" class="form-control" placeholder="Ex.: 000.000.000-00" formControlName="cpf"  /> 
       <div class="text-danger" *ngIf="form.cpf.touched && form.dataNasc.invalid"> 
         <span *ngIf="form.cpf.errors.required"> Por favor, informe o CPF da pessoa. </span> 
       </div>
     </div>
     <div class="col-md-3"> <label>Gênero:</label> <select class="form-select" aria-label="Selecione" formControlName="sexo">
       <option value="" selected>Selecione</option>
-      <option value="0">MASCULINO</option>
-      <option value="1">FEMININO</option>
+      <option value="MASCULINO">MASCULINO</option>
+      <option value="FEMININO">FEMININO</option>
     </select>
       <div class="text-danger" *ngIf="form.sexo.touched && form.sexo.invalid"> 
         <span *ngIf="form.sexo.errors.required"> Por favor, informe o gênero da pessoa. </span> 
       </div>
     </div>
-    <div class="col-md-3"> <label>Altura:</label> <input type="text" class="form-control" formControlName="altura" />
+    <div class="col-md-3"> <label>Altura:</label> <input type="text" class="form-control" placeholder="Ex.: 0.00" formControlName="altura" />
       <div class="text-danger" *ngIf="form.altura.touched && form.altura.invalid"> 
         <span *ngIf="form.altura.errors.required"> Por favor, informe a altura da pessoa. </span> 
       </div>
     </div>
-    <div class="col-md-3"> <label>Peso:</label> <input type="text" class="form-control" formControlName="peso" /> 
+    <div class="col-md-3"> <label>Peso:</label> <input type="text" class="form-control" placeholder="Ex.: 00.00" formControlName="peso" /> 
     <div class="text-danger" *ngIf="form.peso.touched && form.peso.invalid"> 
       <span *ngIf="form.peso.errors.required"> Por favor, informe o peso da pessoa. </span> 
     </div>
