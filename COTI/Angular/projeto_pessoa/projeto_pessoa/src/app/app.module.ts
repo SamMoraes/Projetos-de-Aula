@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CadastrarPessoasComponent } from './cadastrar-pessoas/cadastrar-pessoas.component';
@@ -13,6 +12,7 @@ import { DatePipe } from '@angular/common';
 
 //configurar uma rota de cada componente
 const routes: Routes = [
+  { path: '', component: CadastrarPessoasComponent },
   { path: 'cadastrar-pessoas', component: CadastrarPessoasComponent }, 
   { path: 'consultar-pessoas', component: ConsultarPessoasComponent },
   { path: 'editar-pessoas/:id', component: EditarPessoasComponent }
