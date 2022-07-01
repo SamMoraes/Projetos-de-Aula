@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-consultar-pessoas',
@@ -9,11 +10,14 @@ import { environment } from 'src/environments/environment';
 })
 export class ConsultarPessoasComponent implements OnInit {
 
+  modalRef?: BsModalRef;
+  message?: string;
+
 //atributo para armazenar os dados das pessoas
 pessoas: any[] = [];
 
 //injeção de dependencia 
-constructor(
+constructor(private modalService: BsModalService,
   private httpClient: HttpClient
   ) { }
     
@@ -59,5 +63,21 @@ constructor(
         )
     }
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+ 
+  confirm(): void {
+    this.message = 'Confirmed!';
+    this.modalRef?.hide();
+  }
+ 
+  decline(): void {
+    this.message = 'Declined!';
+    this.modalRef?.hide();
+  }
+
+
 
 }

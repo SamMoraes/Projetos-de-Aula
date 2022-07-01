@@ -9,6 +9,7 @@ import { CadastrarPessoasComponent } from './cadastrar-pessoas/cadastrar-pessoas
 import { ConsultarPessoasComponent } from './consultar-pessoas/consultar-pessoas.component';
 import { EditarPessoasComponent } from './editar-pessoas/editar-pessoas.component';
 import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //configurar uma rota de cada componente
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
